@@ -82,6 +82,8 @@
 import axios from "axios";
 import { computed, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 const route = useRoute();
 const router = useRouter();
@@ -94,6 +96,7 @@ const article = ref({
 });
 
 const isNewArticle = computed(() => !route.path.includes("edit"));
+const articleAction = isNewArticle.value ? "crée" : "modifié";
 
 async function fetchArticle() {
     if (!isNewArticle.value) {
@@ -115,9 +118,24 @@ async function submitForm() {
         } else {
             await axios.put(`/api/articles/${route.params.id}`, article.value);
         }
-        router.push("/");
+        toast(`L'article a bien été ${articleAction} !`, {
+            type: "success",
+            autoClose: 500,
+            onClose: () => {
+                router.push("/");
+            },
+        });
     } catch (error) {
         console.error(error);
+        toast(
+            `Erreur lors de la ${
+                isNewArticle.value ? "création" : "modification"
+            } de l'article.`,
+            {
+                type: "error",
+                autoClose: 1000,
+            }
+        );
     }
 }
 

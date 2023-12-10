@@ -50,6 +50,8 @@
 <script setup>
 import axios from "axios";
 import { onMounted, ref } from "vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 const articles = ref([]);
 
@@ -66,8 +68,16 @@ async function deleteArticle(id) {
     try {
         await axios.delete(`/api/articles/${id}`);
         articles.value = articles.value.filter((article) => article.id !== id);
+        toast(`L'article a bien été supprimé.`, {
+            type: "success",
+            autoClose: 1000,
+        });
     } catch (error) {
         console.error(error);
+        toast(`Erreur lors de la suppression de l'article : ${error.message}`, {
+            type: "error",
+            autoClose: 2000,
+        });
     }
 }
 
