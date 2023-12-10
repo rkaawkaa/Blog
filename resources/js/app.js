@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
+import "./bootstrap";
 
 import App from "./components/App.vue";
 import Article from "./components/Article.vue";

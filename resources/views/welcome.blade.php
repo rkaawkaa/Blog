@@ -4,19 +4,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-        @vite('resources/css/app.css')
+        <title>Blog</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        @vite('resources/css/app.css')
+        @vite(['resources/js/app.js'])
 
-        <!-- Styles -->
 
     </head>
     <body>
-    <h1 class="text-3xl font-bold underline bg-red-700">
-    Hello world!
-  </h1>
+    <div id="app">
+    </div>
     </body>
 </html>
+
