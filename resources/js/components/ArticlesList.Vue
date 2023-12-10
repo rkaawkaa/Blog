@@ -21,21 +21,21 @@
                     <td class="w-2/12">{{ article.category }}</td>
                     <td class="w-2/12">{{ article.status }}</td>
                     <td class="w-3/12">
-                        <div class="flex flex-wrap justify-center gap-3">
+                        <div class="flex flex-wrap justify-center gap-2">
                             <router-link
                                 :to="`/articles/${article.id}`"
-                                class="p-2 px-4 border text-center rounded text-white py-1 px-3 bg-blue-600 hover:bg-blue-900"
+                                class="p-2 lg:my-2 px-4 border text-center rounded text-white py-1 px-3 bg-blue-600 hover:bg-blue-900"
                                 >Voir le détail</router-link
                             >
                             <router-link
                                 :to="`/articles/${article.id}/edit`"
-                                class="p-2 px-4 border text-center rounded text-white py-1 px-3 bg-green-500 hover:bg-green-700"
+                                class="p-2 lg:my-2 px-4 border text-center rounded text-white py-1 px-3 bg-green-500 hover:bg-green-700"
                                 >Modifier</router-link
                             >
                             <button
                                 @click="deleteArticle(article.id)"
                                 type="button"
-                                class="p-2 px-4 border text-center rounded text-white py-1 px-3 bg-red-600 hover:bg-red-700"
+                                class="p-2 lg:my-2 px-4 border text-center rounded text-white py-1 px-3 bg-red-600 hover:bg-red-700"
                             >
                                 Supprimer
                             </button>
