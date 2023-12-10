@@ -84,7 +84,7 @@ export default {
         async submitForm() {
             try {
                 if (this.isNewArticle) {
-                    await axios.post("/api/articles", this.articles);
+                    await axios.post("/api/articles", this.article);
                 } else {
                     await axios.put(
                         `/api/articles/${this.$route.params.id}`,
