@@ -78,50 +78,48 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import axios from "axios";
+import { computed, onMounted, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-export default {
-    data() {
-        return {
-            article: {
-                title: "",
-                description: "",
-                category: "",
-                status: "",
-                image: "",
-            },
-        };
-    },
-    computed: {
-        isNewArticle() {
-            return !this.$route.path.includes("edit");
-        },
-    },
-    async created() {
-        if (!this.isNewArticle) {
+const route = useRoute();
+const router = useRouter();
+const article = ref({
+    title: "",
+    description: "",
+    category: "",
+    status: "",
+    image: "",
+});
+
+const isNewArticle = computed(() => !route.path.includes("edit"));
+
+async function fetchArticle() {
+    if (!isNewArticle.value) {
+        try {
             const response = await axios.get(
-                `/api/articles/${this.$route.params.id}`
+                `/api/articles/${route.params.id}`
             );
-            this.article = response.data;
+            article.value = response.data;
+        } catch (error) {
+            console.error(error);
         }
-    },
-    methods: {
-        async submitForm() {
-            try {
-                if (this.isNewArticle) {
-                    await axios.post("/api/articles", this.article);
-                } else {
-                    await axios.put(
-                        `/api/articles/${this.$route.params.id}`,
-                        this.article
-                    );
-                }
-                this.$router.push("/");
-            } catch (error) {
-                console.error(error);
-            }
-        },
-    },
-};
+    }
+}
+
+async function submitForm() {
+    try {
+        if (isNewArticle.value) {
+            await axios.post("/api/articles", article.value);
+        } else {
+            await axios.put(`/api/articles/${route.params.id}`, article.value);
+        }
+        router.push("/");
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+onMounted(fetchArticle);
 </script>
