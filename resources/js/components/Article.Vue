@@ -16,24 +16,29 @@
     >
 </template>
 
-<script>
+<script setup>
 import axios from "axios";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 
-export default {
-    data() {
-        return {
-            article: {},
-        };
-    },
-    async created() {
+const route = useRoute();
+const article = ref({});
+const isLoading = ref(true);
+
+async function fetchArticle() {
+    const articleId = route.params.id;
+    if (articleId) {
         try {
-            const response = await axios.get(
-                `/api/articles/${this.$route.params.id}`
-            );
-            this.article = response.data;
-        } catch (error) {
-            console.error(error);
+            isLoading.value = true;
+            const response = await axios.get(`/api/articles/${articleId}`);
+            article.value = response.data;
+        } catch (e) {
+            console.error("Erreur lors de la récupération de l'article:", e);
+        } finally {
+            isLoading.value = false;
         }
-    },
-};
+    }
+}
+
+onMounted(fetchArticle);
 </script>
