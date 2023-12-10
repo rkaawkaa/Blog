@@ -47,34 +47,29 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import axios from "axios";
+import { onMounted, ref } from "vue";
 
-export default {
-    data() {
-        return {
-            articles: [],
-        };
-    },
-    async created() {
-        try {
-            const response = await axios.get("/api/articles");
-            this.articles = response.data;
-        } catch (error) {
-            console.error(error);
-        }
-    },
-    methods: {
-        async deleteArticle(id) {
-            try {
-                await axios.delete(`/api/articles/${id}`);
-                this.articles = this.articles.filter(
-                    (article) => article.id !== id
-                );
-            } catch (error) {
-                console.error(error);
-            }
-        },
-    },
-};
+const articles = ref([]);
+
+async function fetchArticles() {
+    try {
+        const response = await axios.get("/api/articles");
+        articles.value = response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function deleteArticle(id) {
+    try {
+        await axios.delete(`/api/articles/${id}`);
+        articles.value = articles.value.filter((article) => article.id !== id);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+onMounted(fetchArticles);
 </script>
