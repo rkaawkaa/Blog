@@ -1,47 +1,46 @@
 <template>
-    <p>ARTICE LIST</p>
-    <!-- <div>
-        <table class="table">
+    <div>
+        <table class="w-full max-w-full mb-4 bg-transparent">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Titre</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Catégorie</th>
-                    <th scope="col">Actions</th>
+                    <th class="text-left">#</th>
+                    <th class="text-left">Titre</th>
+                    <th class="text-left">Catégorie</th>
+                    <th class="text-left">Statut</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="mt-4">
                 <tr v-for="article in articles" :key="article.id">
-                    <td>{{ article.id }}</td>
-                    <td>{{ article.title }}</td>
-                    <td>{{ article.description }}</td>
-                    <td>{{ article.category }}</td>
-                    <td>
-                        <div class="row gap-3">
+                    <td class="w-1/12">{{ article.id }}</td>
+                    <td class="w-4/12">{{ article.title }}</td>
+                    <td class="w-2/12">{{ article.category }}</td>
+                    <td class="w-2/12">{{ article.status }}</td>
+                    <td class="w-3/12">
+                        <div class="flex flex-wrap justify-center gap-3">
                             <router-link
                                 :to="`/articles/${article.id}`"
-                                class="p-2 col border btn btn-primary"
-                                >View</router-link
+                                class="p-2 px-4border text-center rounded text-white py-1 px-3 bg-blue-600 hover:bg-blue-900"
+                                >Voir le détail</router-link
                             >
                             <router-link
                                 :to="`/articles/${article.id}/edit`"
-                                class="p-2 col border btn btn-success"
-                                >Edit</router-link
+                                class="p-2 px-4 border text-center rounded text-white py-1 px-3 bg-green-500 hover:bg-green-700"
+                                >Modifier</router-link
                             >
                             <button
                                 @click="deleteArticle(article.id)"
                                 type="button"
-                                class="p-2 col border btn btn-danger"
+                                class="p-2 px-4 border text-center rounded text-white py-1 px-3 bg-red-600 hover:bg-red-700"
                             >
-                                Delete
+                                Supprimer
                             </button>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div> -->
+    </div>
 </template>
 
 <script>
