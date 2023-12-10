@@ -20,7 +20,7 @@
                         <div class="flex flex-wrap justify-center gap-3">
                             <router-link
                                 :to="`/articles/${article.id}`"
-                                class="p-2 px-4border text-center rounded text-white py-1 px-3 bg-blue-600 hover:bg-blue-900"
+                                class="p-2 px-4 border text-center rounded text-white py-1 px-3 bg-blue-600 hover:bg-blue-900"
                                 >Voir le détail</router-link
                             >
                             <router-link
