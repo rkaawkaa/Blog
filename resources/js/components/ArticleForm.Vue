@@ -38,13 +38,20 @@
                     class="block text-sm font-medium text-gray-700"
                     >Catégorie:</label
                 >
-                <input
+                <select
                     class="mt-1 block max-w-3xl rounded-md border border-black shadow-sm focus:border-indigo-600 px-2 py-2"
-                    type="text"
                     id="category"
                     v-model="article.category"
                     required
-                />
+                >
+                    <option
+                        v-for="category in CATEGORIES"
+                        :key="category"
+                        :value="category"
+                    >
+                        {{ category }}
+                    </option>
+                </select>
             </div>
             <div class="mb-3">
                 <label
@@ -52,13 +59,20 @@
                     class="block text-sm font-medium text-gray-700"
                     >Statut:</label
                 >
-                <input
+                <select
                     class="mt-1 block max-w-3xl rounded-md border border-black shadow-sm focus:border-indigo-600 px-2 py-2"
-                    type="text"
                     id="status"
                     v-model="article.status"
                     required
-                />
+                >
+                    <option
+                        v-for="status in STATUS_CHOICES"
+                        :key="status"
+                        :value="status"
+                    >
+                        {{ status }}
+                    </option>
+                </select>
             </div>
             <button
                 type="submit"
@@ -84,6 +98,15 @@ import { computed, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+
+const CATEGORIES = [
+    "Finance",
+    "Technologie",
+    "Société",
+    "Actualités",
+    "Politique",
+];
+const STATUS_CHOICES = ["Brouillon", "En révision", "Publié", "Archivé"];
 
 const route = useRoute();
 const router = useRouter();
