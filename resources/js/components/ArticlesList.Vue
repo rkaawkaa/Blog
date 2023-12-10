@@ -1,17 +1,21 @@
 <template>
     <div>
-        <table class="w-full max-w-full mb-4 bg-transparent">
+        <table class="w-full max-w-full mb-4 divide-y-4">
             <thead>
                 <tr>
-                    <th class="text-left">#</th>
+                    <th class="text-left">ID</th>
                     <th class="text-left">Titre</th>
                     <th class="text-left">Catégorie</th>
                     <th class="text-left">Statut</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
-            <tbody class="mt-4">
-                <tr v-for="article in articles" :key="article.id">
+            <tbody>
+                <tr
+                    v-for="article in articles"
+                    :key="article.id"
+                    class="divide-y"
+                >
                     <td class="w-1/12">{{ article.id }}</td>
                     <td class="w-4/12">{{ article.title }}</td>
                     <td class="w-2/12">{{ article.category }}</td>
