@@ -65,6 +65,13 @@ async function fetchArticles() {
 }
 
 async function deleteArticle(id) {
+    const userConfirmed = window.confirm(
+        "Êtes-vous sûr de vouloir supprimer cet article ?"
+    );
+
+    if (!userConfirmed) {
+        return;
+    }
     try {
         await axios.delete(`/api/articles/${id}`);
         articles.value = articles.value.filter((article) => article.id !== id);
