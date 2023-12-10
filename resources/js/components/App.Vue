@@ -4,7 +4,7 @@
             <div class="px-3 py-2 bg-gray-900 text-white">
                 <div class="container mx-auto sm:px-4">
                     <div
-                        class="flex flex-wrap items-center justify-center lg:justify-start"
+                        class="flex md:flex-nowrap flex-wrap items-between justify-center lg:justify-start"
                     >
                         <router-link
                             to="/"
@@ -13,7 +13,7 @@
                             <h1 class="font-bold text-3xl white">Blog</h1>
                         </router-link>
                         <ul
-                            class="flex flex-wrap list-none pl-0 mb-0 w-full col-lg-auto my-2 justify-center md:my-0 text-small"
+                            class="flex flex-wrap list-none pl-0 mb-0 w-full col-lg-auto my-2 justify-end md:my-0 text-small"
                         >
                             <li>
                                 <router-link
