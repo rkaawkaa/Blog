@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <p>ARTICE LIST</p>
+    <!-- <div>
         <table class="table">
             <thead>
                 <tr>
@@ -40,7 +41,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> -->
 </template>
 
 <script>

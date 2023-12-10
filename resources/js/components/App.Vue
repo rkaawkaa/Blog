@@ -1,30 +1,26 @@
 <template>
-    <div class="container">
+    <div class="container mx-auto sm:px-4">
         <header>
-            <div class="px-3 py-2 bg-dark text-white">
-                <div class="container">
+            <div class="px-3 py-2 bg-gray-900 text-white">
+                <div class="container mx-auto sm:px-4">
                     <div
-                        class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+                        class="flex flex-wrap items-center justify-center lg:justify-start"
                     >
                         <router-link
                             to="/"
-                            class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
+                            class="flex items-center my-2 lg:my-0 lg:me-auto text-white text-decoration-none"
                         >
-                            <img
-                                src="https://cdn.laraveltuts.com/wp-content/uploads/2022/06/logo-dark.webp"
-                                style="height: 60px"
-                            />
+                            <h1 class="font-bold text-3xl white">Blog</h1>
                         </router-link>
                         <ul
-                            class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small"
+                            class="flex flex-wrap list-none pl-0 mb-0 w-full col-lg-auto my-2 justify-center md:my-0 text-small"
                         >
                             <li>
                                 <router-link
                                     to="/"
-                                    class="nav-link text-white"
-                                    style="text-decoration: none; color: white"
+                                    class="inline-block py-2 px-4 no-underline text-white"
                                     ><svg
-                                        class="bi d-block mx-auto mb-1"
+                                        class="bi block mx-auto mb-1"
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
                                         height="24"
@@ -40,10 +36,9 @@
                             <li>
                                 <router-link
                                     to="/articles/create"
-                                    class="nav-link text-white"
-                                    style="text-decoration: none; color: white"
+                                    class="inline-block py-2 px-4 no-underline text-white"
                                     ><svg
-                                        class="bi d-block mx-auto mb-1"
+                                        class="bi block mx-auto mb-1"
                                         width="24"
                                         height="24"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -62,9 +57,13 @@
             </div>
         </header>
 
-        <div class="card">
-            <div class="card-body">
-                <div class="container-fluid">
+        <div
+            class="relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-gray-300"
+        >
+            <div class="flex-auto p-6">
+                <div
+                    class="container mx-auto sm:px-4 max-w-full mx-auto sm:px-4"
+                >
                     <router-view></router-view>
                 </div>
             </div>
