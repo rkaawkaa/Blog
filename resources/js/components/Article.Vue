@@ -1,19 +1,19 @@
 <template>
-    <div>
-        <h5 id="associating-form-text-with-form-controls">Nom:</h5>
-        <h6>{{ article.title }}</h6>
-        <h5 id="associating-form-text-with-form-controls">Contenu:</h5>
+    <div class="space-y-2 mb-6">
+        <p class="text-2xl font-bold">Nom:</p>
+        <p class="text-xl">{{ article.title }}</p>
+        <p class="text-lg font-semibold">Catégorie:</p>
+        <p>{{ article.category }}</p>
+        <p class="text-lg font-semibold">Statut:</p>
+        <p>{{ article.status }}</p>
+        <p class="text-lg font-semibold">Contenu:</p>
         <p>{{ article.description }}</p>
-        <h5 id="associating-form-text-with-form-controls">Catégorie:</h5>
-        <p>Catégorie: {{ article.category }}</p>
-        <h5 id="associating-form-text-with-form-controls">Statut:</h5>
-        <p>Statut: {{ article.status }}</p>
-        <router-link
-            :to="`/articles/${article.id}/edit`"
-            class="btn btn-primary"
-            >Modifier</router-link
-        >
     </div>
+    <router-link
+        :to="`/articles/${article.id}/edit`"
+        class="py-2 px-4 border text-center rounded bg-blue-600 text-white hover:bg-blue-900"
+        >Modifier</router-link
+    >
 </template>
 
 <script>
