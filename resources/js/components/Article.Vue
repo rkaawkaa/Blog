@@ -3,11 +3,22 @@
         <p class="text-2xl font-bold">Nom:</p>
         <p class="text-xl">{{ article.title }}</p>
         <p class="text-lg font-semibold">Catégorie:</p>
-        <p>{{ article.category }}</p>
+        <p class="pl-2">{{ article.category }}</p>
         <p class="text-lg font-semibold">Statut:</p>
-        <p>{{ article.status }}</p>
+        <p class="pl-2">{{ article.status }}</p>
         <p class="text-lg font-semibold">Contenu:</p>
-        <p>{{ article.description }}</p>
+        <p class="pl-2">{{ article.description }}</p>
+        <p class="text-lg font-semibold">Image d'illustration:</p>
+        <div v-if="article.image" class="mb-4">
+            <img
+                :src="`/images/${article.image}`"
+                :alt="article.title"
+                class="image-size"
+            />
+        </div>
+        <div v-else>
+            <p class="pl-2">Pas d'image.</p>
+        </div>
     </div>
     <router-link
         :to="`/articles/${article.id}/edit`"
@@ -42,3 +53,10 @@ async function fetchArticle() {
 
 onMounted(fetchArticle);
 </script>
+
+<style>
+.image-size {
+    max-height: 200px !important;
+    width: auto;
+}
+</style>

@@ -3,7 +3,7 @@
         <table class="w-full max-w-full mb-4 divide-y-4">
             <thead>
                 <tr>
-                    <th class="text-left">ID</th>
+                    <th class="text-left">Image</th>
                     <th class="text-left">Titre</th>
                     <th class="text-left">Catégorie</th>
                     <th class="text-left">Statut</th>
@@ -16,11 +16,19 @@
                     :key="article.id"
                     class="divide-y"
                 >
-                    <td class="w-1/12">{{ article.id }}</td>
-                    <td class="w-4/12">{{ article.title }}</td>
+                    <td class="w-2/12">
+                        <img
+                            v-if="article.image"
+                            :src="`/images/${article.image}`"
+                            alt="`${article.title}`"
+                            class="image-size"
+                        />
+                        <span v-else>Pas d'image</span>
+                    </td>
+                    <td class="w-3/12">{{ article.title }}</td>
                     <td class="w-2/12">{{ article.category }}</td>
                     <td
-                        :class="`w-2/12 ${getStatusColorClass(
+                        :class="`w-2/12 px-1 ${getStatusColorClass(
                             article.status
                         )} bg-opacity-30`"
                     >
@@ -92,7 +100,7 @@ async function deleteArticle(id) {
         articles.value = articles.value.filter((article) => article.id !== id);
         toast(`L'article a bien été supprimé.`, {
             type: "success",
-            autoClose: 1000,
+            autoClose: 1500,
         });
     } catch (error) {
         console.error(error);
@@ -105,3 +113,11 @@ async function deleteArticle(id) {
 
 onMounted(fetchArticles);
 </script>
+
+<style>
+.image-size {
+    max-height: 100px !important;
+    width: auto;
+    max-width: 95%;
+}
+</style>

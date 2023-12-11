@@ -7,6 +7,7 @@
         <title>Blog</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
+        <link rel="icon" href="../../public/images/icons8-blog-32.png" type="image/png">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
         @vite(['resources/js/app.js', 'resources/css/app.css'])

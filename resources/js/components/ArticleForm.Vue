@@ -74,6 +74,19 @@
                     </option>
                 </select>
             </div>
+            <div class="mb-3">
+                <label
+                    for="image"
+                    class="block text-sm font-medium text-gray-700"
+                    >Image:</label
+                >
+                <input type="file" id="image" @change="handleFileUpload" />
+                <img
+                    v-if="article.image"
+                    :src="`/images/${article.image}`"
+                    alt="Image de l'article"
+                />
+            </div>
             <button
                 type="submit"
                 v-if="isNewArticle"
@@ -110,36 +123,43 @@ const article = ref({
     status: "",
     image: "",
 });
+const file = ref(null);
 
 const isNewArticle = computed(() => !route.path.includes("edit"));
 const articleAction = isNewArticle.value ? "crée" : "modifié";
 
-async function fetchArticle() {
-    if (!isNewArticle.value) {
-        try {
-            const response = await axios.get(
-                `/api/articles/${route.params.id}`
-            );
-            article.value = response.data;
-        } catch (error) {
-            console.error(error);
-        }
-    }
+function handleFileUpload(event) {
+    file.value = event.target.files[0];
 }
 
 async function submitForm() {
+    const formData = new FormData();
+    formData.append("title", article.value.title);
+    formData.append("description", article.value.description);
+    formData.append("category", article.value.category);
+    formData.append("status", article.value.status);
+
+    if (file.value) {
+        formData.append("image", file.value);
+    }
+    console.log("FormData:", Object.fromEntries(formData));
+    console.log(formData);
     try {
         if (isNewArticle.value) {
-            await axios.post("/api/articles", article.value);
+            await axios.post("/api/articles", formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
         } else {
-            await axios.put(`/api/articles/${route.params.id}`, article.value);
+            formData.append("_method", "PUT");
+            await axios.post(`/api/articles/${route.params.id}`, formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
         }
-        toast(`L'article a bien été ${articleAction} !`, {
-            type: "success",
-            autoClose: 500,
-            onClose: () => {
-                router.push("/");
-            },
+        router.push("/").then(() => {
+            toast(`L'article a bien été ${articleAction} !`, {
+                type: "success",
+                autoClose: 1500,
+            });
         });
     } catch (error) {
         console.error(error);
@@ -156,4 +176,17 @@ async function submitForm() {
 }
 
 onMounted(fetchArticle);
+
+async function fetchArticle() {
+    if (!isNewArticle.value) {
+        try {
+            const response = await axios.get(
+                `/api/articles/${route.params.id}`
+            );
+            article.value = response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
 </script>
