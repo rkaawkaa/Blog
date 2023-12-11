@@ -12,7 +12,7 @@
                     >Nom:</label
                 >
                 <input
-                    class="mt-1 block border max-w-3xl rounded-md border-black shadow-sm focus:border-indigo-600 px-2 py-2"
+                    class="mt-1 block border w-full md:max-w-[40%] rounded-md border-black shadow-sm focus:border-indigo-600 px-2 py-2"
                     type="text"
                     id="title"
                     v-model="article.title"
@@ -74,7 +74,7 @@
                     </option>
                 </select>
             </div>
-            <div class="mb-3">
+            <div>
                 <label
                     for="image"
                     class="block text-sm font-medium text-gray-700"
@@ -82,9 +82,10 @@
                 >
                 <input type="file" id="image" @change="handleFileUpload" />
                 <img
-                    v-if="article.image"
+                    v-if="article.image && !file"
                     :src="`/images/${article.image}`"
-                    alt="Image de l'article"
+                    :alt="article.title"
+                    class="image-size mt-3"
                 />
             </div>
             <button
@@ -142,8 +143,6 @@ async function submitForm() {
     if (file.value) {
         formData.append("image", file.value);
     }
-    console.log("FormData:", Object.fromEntries(formData));
-    console.log(formData);
     try {
         if (isNewArticle.value) {
             await axios.post("/api/articles", formData, {
@@ -190,3 +189,10 @@ async function fetchArticle() {
     }
 }
 </script>
+
+<style>
+.image-size {
+    max-height: 300px !important;
+    max-width: 300px !important;
+}
+</style>
