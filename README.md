@@ -68,7 +68,11 @@ Dans le dossier du projet, ouvrez un nouveau terminal et exécutez la commande :
 php artisan serve
 ```
 
-Puis naviguez vers l'adresse du serveur de développement:
+Puis naviguez vers l'adresse du serveur de développement:<br>
+![image](https://github.com/rkaawkaa/Blog/assets/88223901/8b4754a3-dc21-459f-802a-4d0abcb6f323)
+
+
+
 
 ## 5. Ensemencement de la base de données
 
@@ -79,5 +83,7 @@ php artisan db:seed
 ```
 
 Puis rafraichissez votre navigateur pour voir les nouvelles données sur l'application web.
+<br><br>
+![image](https://github.com/rkaawkaa/Blog/assets/88223901/68389b0d-cb76-4d92-9032-d8a5675fe7c7)
 
 **Développé par KAWKA Robin**
