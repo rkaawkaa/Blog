@@ -11,7 +11,11 @@
         <p class="text-lg font-semibold">Image d'illustration:</p>
         <div v-if="article.image" class="mb-4">
             <img
-                :src="`/images/${article.image}`"
+                :src="
+                    isExternalUrl(article.image)
+                        ? article.image
+                        : `/images/${article.image}`
+                "
                 :alt="article.title"
                 class="image-size"
             />
@@ -31,6 +35,7 @@
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
+import { isExternalUrl } from "../helpers/fonctions";
 
 const route = useRoute();
 const article = ref({});

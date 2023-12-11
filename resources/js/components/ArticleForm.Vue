@@ -83,7 +83,11 @@
                 <input type="file" id="image" @change="handleFileUpload" />
                 <img
                     v-if="article.image && !file"
-                    :src="`/images/${article.image}`"
+                    :src="
+                        isExternalUrl(article.image)
+                            ? article.image
+                            : `/images/${article.image}`
+                    "
                     :alt="article.title"
                     class="image-size mt-3"
                 />
@@ -114,6 +118,7 @@ import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 import { CATEGORIES } from "../constants/categories";
 import { STATUS_COLORS } from "../constants/status";
+import { isExternalUrl } from "../helpers/fonctions";
 
 const route = useRoute();
 const router = useRouter();
