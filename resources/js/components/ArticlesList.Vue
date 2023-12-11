@@ -117,7 +117,6 @@ onMounted(fetchArticles);
 <style>
 .image-size {
     max-height: 100px !important;
-    width: auto;
-    max-width: 95%;
+    max-width: 95% !important;
 }
 </style>
