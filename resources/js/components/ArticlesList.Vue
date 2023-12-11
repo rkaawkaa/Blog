@@ -1,6 +1,12 @@
 <template>
     <div>
-        <table class="w-full max-w-full mb-4 divide-y-4">
+        <div v-if="isLoading" class="text-center mt-4">
+            <p>Chargement des données...</p>
+        </div>
+        <table
+            v-else-if="articles.length > 0"
+            class="w-full max-w-full mb-4 divide-y-4"
+        >
             <thead>
                 <tr>
                     <th class="text-left">Image</th>
@@ -62,6 +68,12 @@
                 </tr>
             </tbody>
         </table>
+        <div v-else class="text-center mt-4">
+            <p>
+                Aucun article. Vous pouvez en créer un en cliquant sur "Ajouter
+                un article" en haut à droite.
+            </p>
+        </div>
     </div>
 </template>
 
@@ -74,6 +86,7 @@ import { STATUS_COLORS } from "../constants/status";
 import { isExternalUrl } from "../helpers/fonctions";
 
 const articles = ref([]);
+const isLoading = ref(true);
 
 const getStatusColorClass = (status) => {
     const statusKey = Object.keys(STATUS_COLORS).find(
@@ -88,6 +101,8 @@ async function fetchArticles() {
         articles.value = response.data;
     } catch (error) {
         console.error(error);
+    } finally {
+        isLoading.value = false;
     }
 }
 
