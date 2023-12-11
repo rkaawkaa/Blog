@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Exception;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
+use Termwind\Components\Dd;
 
 class ArticleController extends Controller
 {
@@ -20,7 +22,7 @@ class ArticleController extends Controller
             'description' => 'required',
             'category' => 'required',
             'status' => 'required',
-            'image' => 'nullable|image|max:2000',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $article = new Article($request->all());
@@ -50,8 +52,9 @@ class ArticleController extends Controller
             'description' => 'required',
             'category' => 'required',
             'status' => 'required',
-            'image' => 'nullable|image|max:1999',
+            'image' => 'nullable|image|max:2048',
         ]);
+
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $imageName = time().'.'.$request->image->extension();
@@ -61,7 +64,7 @@ class ArticleController extends Controller
             $request->except(['image']);
         }
 
-        $article->update($request->all());
+        $article->save($request->all());
         return $article;
     }
 
