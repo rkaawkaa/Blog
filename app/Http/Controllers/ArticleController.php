@@ -10,6 +10,12 @@ use Termwind\Components\Dd;
 
 class ArticleController extends Controller
 {
+
+    private function uploadImage(Article $article,Request $request): string {
+            $imageName = uniqid().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            return $imageName;
+    }
     public function index()
     {
         return Article::all();
@@ -24,13 +30,10 @@ class ArticleController extends Controller
             'status' => 'required',
             'image' => 'nullable|image|max:2048',
         ]);
-
         $article = new Article($request->all());
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $article->image = $this->uploadImage($article, $request);
 
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
-            $article->image = $imageName;
         }
 
         $article->save();
@@ -55,15 +58,11 @@ class ArticleController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
 
-
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
-            $article->image = $imageName;
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+            $article->image = $this->uploadImage($article, $request);
         } else {
             $request->except(['image']);
         }
-
         $article->save($request->all());
         return $article;
     }
