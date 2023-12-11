@@ -32,7 +32,7 @@ cp .env.example .env
 
 ## 2.Configuration de la base de données
 
-Après avoir lancé vos serveurs MySQL et Apache en local (avec XAMPP par exemple), aller sur le fichier .env du projet et paramétrez la connexion avec la base de données en modifiant ces champs :
+Lancez vos serveurs MySQL et Apache en local (avec XAMPP par exemple),puis ouvrez le projet avec un IDE et allez sur le fichier .env du projet. Paramétrez la connexion avec la base de données en modifiant ces champs :
 
 ```
 DB_CONNECTION=mysql
