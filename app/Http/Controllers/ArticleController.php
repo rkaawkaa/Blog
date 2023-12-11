@@ -60,10 +60,14 @@ class ArticleController extends Controller
 
         if($request->hasFile('image') && $request->file('image')->isValid()) {
             $article->image = $this->uploadImage($article, $request);
-        } else {
-            $request->except(['image']);
         }
-        $article->save($request->all());
+        $article->title = $request->input('title');
+        $article->description = $request->input('description');
+        $article->category = $request->input('category');
+        $article->status = $request->input('status');
+
+        $article->save();
+
         return $article;
     }
 
