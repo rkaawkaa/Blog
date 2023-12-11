@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto sm:px-4">
+    <div class="container mx-auto sm:px-4 mb-4">
         <header>
             <div class="px-3 py-2 bg-gray-900 text-white">
                 <div class="container mx-auto sm:px-4">
