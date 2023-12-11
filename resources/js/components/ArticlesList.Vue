@@ -19,7 +19,13 @@
                     <td class="w-1/12">{{ article.id }}</td>
                     <td class="w-4/12">{{ article.title }}</td>
                     <td class="w-2/12">{{ article.category }}</td>
-                    <td class="w-2/12">{{ article.status }}</td>
+                    <td
+                        :class="`w-2/12 ${getStatusColorClass(
+                            article.status
+                        )} bg-opacity-30`"
+                    >
+                        {{ article.status }}
+                    </td>
                     <td class="w-3/12">
                         <div class="flex flex-wrap justify-center gap-2">
                             <router-link
@@ -52,8 +58,16 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import { STATUS_COLORS } from "../constants/status";
 
 const articles = ref([]);
+
+const getStatusColorClass = (status) => {
+    const statusKey = Object.keys(STATUS_COLORS).find(
+        (key) => STATUS_COLORS[key].label === status
+    );
+    return statusKey ? STATUS_COLORS[statusKey].color : "";
+};
 
 async function fetchArticles() {
     try {
@@ -72,6 +86,7 @@ async function deleteArticle(id) {
     if (!userConfirmed) {
         return;
     }
+
     try {
         await axios.delete(`/api/articles/${id}`);
         articles.value = articles.value.filter((article) => article.id !== id);

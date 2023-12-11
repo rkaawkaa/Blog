@@ -46,7 +46,7 @@
                 >
                     <option
                         v-for="category in CATEGORIES"
-                        :key="category"
+                        :key="index"
                         :value="category"
                     >
                         {{ category }}
@@ -66,11 +66,11 @@
                     required
                 >
                     <option
-                        v-for="status in STATUS_CHOICES"
-                        :key="status"
-                        :value="status"
+                        v-for="(status, key) in STATUS_COLORS"
+                        :key="key"
+                        :value="status.label"
                     >
-                        {{ status }}
+                        {{ status.label }}
                     </option>
                 </select>
             </div>
@@ -98,15 +98,8 @@ import { computed, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
-
-const CATEGORIES = [
-    "Finance",
-    "Technologie",
-    "Société",
-    "Actualités",
-    "Politique",
-];
-const STATUS_CHOICES = ["Brouillon", "En révision", "Publié", "Archivé"];
+import { CATEGORIES } from "../constants/categories";
+import { STATUS_COLORS } from "../constants/status";
 
 const route = useRoute();
 const router = useRouter();
