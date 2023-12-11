@@ -20,7 +20,7 @@
                         <img
                             v-if="article.image"
                             :src="`/images/${article.image}`"
-                            alt="`${article.title}`"
+                            :alt="article.title"
                             class="image-size"
                         />
                         <span v-else>Pas d'image</span>
